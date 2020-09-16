@@ -28,7 +28,7 @@ jobs:
         with:
           push: true
           platforms: linux/arm/v7,linux/arm64
-          tag: bmiddha/oven-temp:latest
+          tags: bmiddha/oven-temp:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
