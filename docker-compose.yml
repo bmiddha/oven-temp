@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  influxdb:
+    image: influxdb:1.8
+    restart: unless-stopped
+    volumes:
+      - influxdb:/var/lib/influxdb
+    networks:
+      - oventemp-net
+  grafana:
+    image: grafana/grafana:7.1.5
+    restart: unless-stopped
+    volumes:
+      - grafana:/var/lib/grafana
+    environment:
+      - GF_DEFAULT_INSTANCE_NAME=grafana
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+    networks:
+      - oventemp-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=3000"
+  oven-temp:
+    image: bmiddha/oven-temp:latest
+    restart: unless-stopped
+    privileged: true
+    networks:
+      - oventemp-net
+  traefik:
+    image: traefik:alpine
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /traefik/traefik.toml:/etc/traefik/traefik.toml
+      - /traefik/acme.json:/acme.json
+
+networks:
+  oventemp-net:
+
+volumes:
+  influxdb:
+  grafana:
