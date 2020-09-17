@@ -56,22 +56,23 @@ def connectInflux():
 
 
 ifclient = connectInflux()
-if not any (d["name"] == INFLUXDB_DB for d in ifclient.get_list_database()):
+if not any(d["name"] == INFLUXDB_DB for d in ifclient.get_list_database()):
     print(f"Database does not exist. Creating {INFLUXDB_DB} database.")
     ifclient.create_database(INFLUXDB_DB)
 retention_policies = ifclient.get_list_retention_policies()
-if not any (d["name"] == "a_week" for d in retention_policies):
+if not any(d["name"] == "a_week" for d in retention_policies):
     print(f"Week retention policy does not exist does not exist. Creating...")
     ifclient.create_retention_policy(
         'a_week', '1w', 1, default=True, database=INFLUXDB_DB)
-if not any (d["name"] == "a_year" for d in retention_policies):
+if not any(d["name"] == "a_year" for d in retention_policies):
     print(f"Year retention policy does not exist does not exist. Creating...")
     ifclient.create_retention_policy(
         'a_year', '52w', 1, default=False, database=INFLUXDB_DB)
-if not any (d["name"] == "cq_30m" for db in ifclient.get_list_continuous_queries() for key in db.keys() if key == INFLUXDB_DB for d in db[INFLUXDB_DB]):
+if not any(d["name"] == "cq_30m" for db in ifclient.get_list_continuous_queries() for key in db.keys() if key == INFLUXDB_DB for d in db[INFLUXDB_DB]):
     print(f"Year continuous query does not exist does not exist. Creating...")
     select_clause = 'SELECT mean("temperature") AS "mean_temperature",mean("humidity") AS "mean_humidity" INTO "a_year"."downsampled_environment" FROM "environment" GROUP BY time(30m)'
-    ifclient.create_continuous_query('cq_30m', select_clause, database=INFLUXDB_DB)
+    ifclient.create_continuous_query(
+        'cq_30m', select_clause, database=INFLUXDB_DB)
 
 while True:
     # clear screen
