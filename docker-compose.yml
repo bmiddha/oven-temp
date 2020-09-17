@@ -6,8 +6,11 @@ services:
     restart: unless-stopped
     volumes:
       - influxdb:/var/lib/influxdb
+    env_file: .env
     networks:
       - oventemp-net
+    ports:
+      - "8086:8086"
   grafana:
     image: grafana/grafana:7.1.5
     restart: unless-stopped
@@ -21,12 +24,6 @@ services:
       - oventemp-net
     ports:
       - "3000:3000"
-  oven-temp:
-    image: bmiddha/oven-temp:edge
-    restart: unless-stopped
-    privileged: true
-    networks:
-      - oventemp-net
 networks:
   oventemp-net:
 
