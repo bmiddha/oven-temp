@@ -1,0 +1,12 @@
+[Unit]
+Description=Oven Temp
+After=network.target multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/oven-temp/oven_temp.py
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
