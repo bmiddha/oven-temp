@@ -9,6 +9,12 @@ Just a simple temperature monitor.
 - 📈 Grafana + InfluxDB to log and graph data (😍 📈📉📊).
 - 🐳 Also, it uses docker 😏.
 
+## Images
+
+![dashboard](images/grafana.jpg)
+![display](images/display.jpg)
+![pi](images/pi.jpg)
+
 ## 🔌 Wiring
 
 | Pi Pin              | Device  | Device Pin |
