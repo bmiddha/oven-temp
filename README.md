@@ -9,7 +9,7 @@ Just a simple temperature monitor.
 - 📈 Grafana + InfluxDB to log and graph data (😍 📈📉📊).
 - 🐳 Also, it uses docker 😏.
 
-## Images
+## 📷 Images
 
 ![dashboard](images/grafana.jpg)
 ![display](images/display.jpg)
@@ -29,16 +29,16 @@ Just a simple temperature monitor.
 
 ## 🔧 Setup
 
-### General Pi Setup
+### 🥧 General Pi Setup
 
 Setup locales, update default passwords, run updates and such. You know, the general setting up a new Pi stuff.
 
-### Enable I2C and SPI
+### 🚧 Enable I2C and SPI
 
 - Enable I2C and SPI in the "Interfacing" menu of `raspi-config`.
 - Reboot.
 
-### Install Docker
+### 🐳 Install Docker
 
 You can install docker and run containers wherever you want, on the Pi, or another host. The code assumes `localhost` be default for the InfluxDB connection.
 
@@ -50,7 +50,7 @@ sudo apt install -y docker-compose # the install script does not include compose
 sudo usermod -aG docker pi # should take affect after a re-login
 ```
 
-### Python Bits
+### 🐍 Python Bits
 
 Install dependencies
 
@@ -72,7 +72,7 @@ Copy the systemd service. The service assumes that the repo is cloned in `/home/
 sudo cp oven-temp.service /etc/systemd/system # in the oven-temp dir
 ```
 
-### Bringing everything together
+### 🔥 Bringing everything together
 
 Start the Grafana and InfluxDB services
 
@@ -86,7 +86,7 @@ Start and enable service
 sudo systemd enable --now oven-temp.service
 ```
 
-### Dashboard Setup
+### 📈 Dashboard Setup
 
 - Open a browser to `http://RASPBERRY_PI_IP:3000/` to access Grafana. Default credentials are admin, admin.
 
