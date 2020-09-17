@@ -1,6 +1,6 @@
 [Unit]
 Description=Oven Temp
-After=network.target multi-user.target
+After=multi-user.target docker.service
 
 [Service]
 Type=simple
