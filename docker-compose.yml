@@ -12,10 +12,11 @@ services:
     ports:
       - "8086:8086"
   grafana:
-    image: grafana/grafana:7.1.5
+    image: grafana/grafana:7.3.6
     restart: unless-stopped
     volumes:
       - grafana:/var/lib/grafana
+    env_file: .env
     environment:
       - GF_DEFAULT_INSTANCE_NAME=grafana
       - GF_AUTH_ANONYMOUS_ENABLED=true
@@ -31,10 +32,11 @@ services:
       - "3000:3000"
   renderer:
     image: grafana/grafana-image-renderer:2.0.0
+    restart: unless-stopped
     networks:
       - oventemp-net
     environment:
-      ENABLE_METRICS: 'true'
+      - ENABLE_METRICS=true
   smtp:
    image: namshi/smtp
    restart: unless-stopped
