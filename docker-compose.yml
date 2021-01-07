@@ -31,7 +31,7 @@ services:
     ports:
       - "3000:3000"
   renderer:
-    image: grafana/grafana-image-renderer:2.0.0
+    image: bmiddha/grafana-image-renderer
     restart: unless-stopped
     networks:
       - oventemp-net
