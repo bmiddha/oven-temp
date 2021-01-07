@@ -37,6 +37,8 @@ services:
       - oventemp-net
     environment:
       - ENABLE_METRICS=true
+      - BROWSER_TZ=America/Chicago
+
   smtp:
    image: namshi/smtp
    restart: unless-stopped
